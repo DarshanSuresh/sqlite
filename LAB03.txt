@@ -1,0 +1,284 @@
+Microsoft Windows [Version 10.0.26200.8246]
+(c) Microsoft Corporation. All rights reserved.
+
+D:\sqlite-25104>sqlite3 main_database.db
+SQLite version 3.53.4 2026-07-24 19:02:57
+Enter ".help" for usage hints.
+sqlite> creat table company(
+(x1...> company_id INTEGER PRIMARY KEY,
+(x1...> company_name TEXT NOT NULL,
+(x1...> industry TEXT,
+(x1...> head_office TEXT
+(x1...> );
+Parse error near line 1: near "creat": syntax error
+  creat table company( company_id INTEGER PRIMARY KEY, company_name TEXT NOT NUL
+  ^--- error here
+sqlite> create table company(
+(x1...> company_id INTEGER PRIMARY KEY,
+(x1...> company_name TEXT NOT NULL,
+(x1...> industry TEXT,
+(x1...> head_office TEXT
+(x1...> );
+sqlite> INSERT INTO company VALUES
+   ...> (1, 'TechNova Elc', 'Electronics', 'Bengalore'),
+   ...> (2, 'GreenMarket Elc', 'Computer Science', 'Mysuru');
+sqlite> select * from company;
+╭────────────┬─────────────────┬──────────────────┬─────────────╮
+│ company_id │  company_name   │     industry     │ head_office │
+╞════════════╪═════════════════╪══════════════════╪═════════════╡
+│          1 │ TechNova Elc    │ Electronics      │ Bengalore   │
+│          2 │ GreenMarket Elc │ Computer Science │ Mysuru      │
+╰────────────┴─────────────────┴──────────────────┴─────────────╯
+sqlite> create table product(
+(x1...> product_id INTEGER PRIMARY KEY,
+(x1...> company_id INTEGER,
+(x1...> product_name TEXT NOT NULL,
+(x1...> category TEXT,
+(x1...> price REAL
+(x1...> );
+sqlite> INSERT INTO product VALUES
+   ...> (101, 1, 'Smartphone', 'Electronics', 25000),
+   ...> (102, 1, 'Laptop', 'Electronics', 65000),0
+   ...> (103, 1, 'Smart TV', 'Electronics', 45000),
+   ...> (104, 2, 'Microsoft Excel', 'Computer Science', 800),
+   ...> (105, 2, 'MongoDB', 'Computer Science', 1500),
+   ...> (106, 2, 'SQLite', 'Computer Science', 2200)
+   ...> );
+Parse error near line 24: near "0": syntax error
+   25000), (102, 1, 'Laptop', 'Electronics', 65000),0 (103, 1, 'Smart TV', 'Elec
+                                      error here ---^
+sqlite> INSERT INTO product VALUES
+   ...> (101, 1, 'Smartphone', 'Electronics', 25000),
+   ...> (102, 1, 'Laptop', 'Electronics', 65000),
+   ...> (103, 1, 'Smart TV', 'Electronics', 45000),
+   ...> (104, 2, 'Microsoft Excel', 'Computer Science', 800),
+   ...> (105, 2, 'MongoDB', 'Computer Science', 1500),
+   ...> (106, 2, 'SQLite', 'Computer Science', 2200)
+   ...> );
+Parse error near line 32: near ")": syntax error
+  00), (106, 2, 'SQLite', 'Computer Science', 2200) );
+                                      error here ---^
+sqlite> INSERT INTO product VALUES
+   ...> (101, 1, 'Smartphone', 'Electronics', 25000),
+   ...> (102, 1, 'Laptop', 'Electronics', 65000),0
+   ...> (102, 1, 'Laptop', 'Electronics', 65000);
+Parse error near line 40: near "0": syntax error
+   25000), (102, 1, 'Laptop', 'Electronics', 65000),0 (102, 1, 'Laptop', 'Electr
+                                      error here ---^
+sqlite> INSERT INTO product VALUES
+   ...> (101, 1, 'Smartphone', 'Electronics', 25000),
+   ...> (102, 1, 'Laptop', 'Electronics', 65000),
+   ...> (103, 1, 'Smart TV', 'Electronics', 45000),
+   ...> (104, 2, 'Microsoft Excel', 'Computer Science', 800),
+   ...> (105, 2, 'MongoDB', 'Computer Science', 1500),
+   ...> (106, 2, 'SQLite', 'Computer Science', 2200);
+sqlite> select * from product;
+╭────────────┬────────────┬─────────────────┬──────────────────┬─────────╮
+│ product_id │ company_id │  product_name   │     category     │  price  │
+╞════════════╪════════════╪═════════════════╪══════════════════╪═════════╡
+│        101 │          1 │ Smartphone      │ Electronics      │ 25000.0 │
+│        102 │          1 │ Laptop          │ Electronics      │ 65000.0 │
+│        103 │          1 │ Smart TV        │ Electronics      │ 45000.0 │
+│        104 │          2 │ Microsoft Excel │ Computer Science │   800.0 │
+│        105 │          2 │ MongoDB         │ Computer Science │  1500.0 │
+│        106 │          2 │ SQLite          │ Computer Science │  2200.0 │
+╰────────────┴────────────┴─────────────────┴──────────────────┴─────────╯
+sqlite> .exit
+
+D:\sqlite-25104>sqlite3 branches.db
+SQLite version 3.53.4 2026-07-24 19:02:57
+Enter ".help" for usage hints.
+sqlite> create table branch(
+(x1...> branch_id INTEGER PRIMARY KEY,
+(x1...> company_id INTEGER,
+(x1...> branch_name TEXT NOT NULL,
+(x1...> city TEXT,
+(x1...> manager TEXT
+(x1...> );
+sqlite> insert into branch values
+   ...> (1, 1, 'TechNova Bengaluru Branch', 'Bengaluru', 'Ramesh'),
+   ...> (2, 1, 'TechNova Mysuru Branch', 'Mysuru', 'Kiran'),
+   ...> (3, 1, 'TechNova Hyderabad Branch', 'Hyderabad', 'Anil'),
+   ...> (4, 2, 'GreenMarket Mysuru Branch', 'Mysuru', 'Suresh'),
+   ...> (5, 2, 'GreenMarket Bengaluru Branch', 'Bengaluru', 'Meena');
+sqlite> select * from company;
+Parse error near line 14: no such table: company
+sqlite> select * from branch;
+╭───────────┬────────────┬──────────────────────────────┬───────────┬─────────╮
+│ branch_id │ company_id │         branch_name          │   city    │ manager │
+╞═══════════╪════════════╪══════════════════════════════╪═══════════╪═════════╡
+│         1 │          1 │ TechNova Bengaluru Branch    │ Bengaluru │ Ramesh  │
+│         2 │          1 │ TechNova Mysuru Branch       │ Mysuru    │ Kiran   │
+│         3 │          1 │ TechNova Hyderabad Branch    │ Hyderabad │ Anil    │
+│         4 │          2 │ GreenMarket Mysuru Branch    │ Mysuru    │ Suresh  │
+│         5 │          2 │ GreenMarket Bengaluru Branch │ Bengaluru │ Meena   │
+╰───────────┴────────────┴──────────────────────────────┴───────────┴─────────╯
+sqlite> create table factory(
+(x1...> factory_id INTEGER PRIMARY KEY,
+(x1...> company_id INTEGER,
+(x1...> factory_name TEXT NOT NULL,
+(x1...> city TEXT,
+(x1...> capacity INTEGER);
+sqlite> insert into factory values
+   ...> (1, 1, 'Technova Private Limited', 'Bengaluru', '150'),
+   ...> (2, 1, 'Technova Private Limited', 'Mysuru', '250'),
+   ...> (3, 1, 'Technova Private Limited - Main', 'Hyderabad', '800'),
+   ...> (4, 2, 'greenmarket Private Limited - Main', 'Mysuru', '350'),
+   ...> (5, 2, 'greenmarket Private Limited', 'Bengaluru', '80');
+sqlite> select * from factory;
+╭────────────┬────────────┬────────────────────────────────────┬───────────┬──────────╮
+│ factory_id │ company_id │            factory_name            │   city    │ capacity │
+╞════════════╪════════════╪════════════════════════════════════╪═══════════╪══════════╡
+│          1 │          1 │ Technova Private Limited           │ Bengaluru │      150 │
+│          2 │          1 │ Technova Private Limited           │ Mysuru    │      250 │
+│          3 │          1 │ Technova Private Limited - Main    │ Hyderabad │      800 │
+│          4 │          2 │ greenmarket Private Limited - Main │ Mysuru    │      350 │
+│          5 │          2 │ greenmarket Private Limited        │ Bengaluru │       80 │
+╰────────────┴────────────┴────────────────────────────────────┴───────────┴──────────╯
+sqlite> create table factory_product(
+(x1...> factory_id INTEGER,
+(x1...> product_id INTEGER,
+(x1...> production_quantity INTEGER,
+(x1...> PRIMARY KEY (factory_id, product_id));
+sqlite> insert into factory_product values
+   ...> (1, 101, 8000),
+   ...> (1, 102, 3000),
+   ...> (2, 103, 4500),
+   ...> (3, 104, 18000),
+   ...> (3, 105, 12000),
+   ...> (4, 106, 14000);
+sqlite> select * from factory_product;
+╭────────────┬────────────┬─────────────────────╮
+│ factory_id │ product_id │ production_quantity │
+╞════════════╪════════════╪═════════════════════╡
+│          1 │        101 │                8000 │
+│          1 │        102 │                3000 │
+│          2 │        103 │                4500 │
+│          3 │        104 │               18000 │
+│          3 │        105 │               12000 │
+│          4 │        106 │               14000 │
+╰────────────┴────────────┴─────────────────────╯
+sqlite> .tables
+branch     factory     factory_product
+sqlite> .exit
+
+D:\sqlite-25104>sqlite3 main_database.db
+SQLite version 3.53.4 2026-07-24 19:02:57
+Enter ".help" for usage hints.
+sqlite> .tables
+company     product
+
+sqlite> attach database 'D:\sqlite-25104\branches.db' as branch_db;
+sqlite> pragma database_list;
+╭─────┬───────────┬──────────────────────────────────╮
+│ seq │   name    │               file               │
+╞═════╪═══════════╪══════════════════════════════════╡
+│   0 │ main      │ D:\sqlite-25104\main_database.db │
+│   2 │ branch_db │ D:\sqlite-25104\branches.db      │
+╰─────┴───────────┴──────────────────────────────────╯
+sqlite> select name from main.sqlite_schema where type='table';
+╭─────────╮
+│  name   │
+╞═════════╡
+│ company │
+│ product │
+╰─────────╯
+sqlite> select name from branch_db.sqlite_schema where type='table';
+╭─────────────────╮
+│      name       │
+╞═════════════════╡
+│ branch          │
+│ factory         │
+│ factory_product │
+╰─────────────────╯
+sqlite> select company.company_name, branch_db.factory.factory_name, branch_db.factory.city from company join branch_db.factory on company.company_id = branch_db.factory.company_id;
+╭─────────────────┬────────────────────────────────────┬───────────╮
+│  company_name   │            factory_name            │   city    │
+╞═════════════════╪════════════════════════════════════╪═══════════╡
+│ TechNova Elc    │ Technova Private Limited           │ Bengaluru │
+│ TechNova Elc    │ Technova Private Limited           │ Mysuru    │
+│ TechNova Elc    │ Technova Private Limited - Main    │ Hyderabad │
+│ GreenMarket Elc │ greenmarket Private Limited - Main │ Mysuru    │
+│ GreenMarket Elc │ greenmarket Private Limited        │ Bengaluru │
+╰─────────────────┴────────────────────────────────────┴───────────╯
+sqlite> SELECT f.factory_name, f.city, p.product_name, fp.production_quantity FROM branch_db.factory f JOIN branch_db.factory_product fp ON f.factory_id = fp.factory_idJOIN main.product p ON fp.product_id = p.product_id;
+Parse error near line 7: near "main": syntax error
+  ry_product fp ON f.factory_id = fp.factory_idJOIN main.product p ON fp.product
+                                      error here ---^
+sqlite> SELECT f.factory_name, f.city, p.product_name, fp.production_quantity FROM branch_db.factory f JOIN branch_db.factory_product fp ON f.factory_id = fp.factory_id JOIN main_database.product p ON fp.product_id = p.product_id;
+Parse error near line 8: no such table: main_database.product
+sqlite> SELECT f.factory_name, f.city, p.product_name, fp.production_quantity FROM branch_db.factory f JOIN branch_db.factory_product fp ON f.factory_id = fp.factory_id JOIN main.product p ON fp.product_id = p.product_id;
+╭────────────────────────────────────┬───────────┬─────────────────┬─────────────────────╮
+│            factory_name            │   city    │  product_name   │ production_quantity │
+╞════════════════════════════════════╪═══════════╪═════════════════╪═════════════════════╡
+│ Technova Private Limited           │ Bengaluru │ Smartphone      │                8000 │
+│ Technova Private Limited           │ Bengaluru │ Laptop          │                3000 │
+│ Technova Private Limited           │ Mysuru    │ Smart TV        │                4500 │
+│ Technova Private Limited - Main    │ Hyderabad │ Microsoft Excel │               18000 │
+│ Technova Private Limited - Main    │ Hyderabad │ MongoDB         │               12000 │
+│ greenmarket Private Limited - Main │ Mysuru    │ SQLite          │               14000 │
+╰────────────────────────────────────┴───────────┴─────────────────┴─────────────────────╯
+sqlite> SELECT DISTINCT p.product_name, f.city AS factory_city FROM main.product p JOIN branch_db.factory_product fp ON p.product_id = fp.product_id JOIN branch_db.factory f ON fp.factory_id = f.factory_id WHERE f.city = 'Mysuru';
+╭──────────────┬──────────────╮
+│ product_name │ factory_city │
+╞══════════════╪══════════════╡
+│ Smart TV     │ Mysuru       │
+│ SQLite       │ Mysuru       │
+╰──────────────┴──────────────╯
+sqlite> SELECT p.product_name, p.price, b.branch_name, b.city AS branch_city FROM main.product p JOIN branch_db.branch b ON p.company_id = b.company_id WHERE p.price > 20000;
+╭──────────────┬─────────┬───────────────────────────┬─────────────╮
+│ product_name │  price  │        branch_name        │ branch_city │
+╞══════════════╪═════════╪═══════════════════════════╪═════════════╡
+│ Smartphone   │ 25000.0 │ TechNova Bengaluru Branch │ Bengaluru   │
+│ Smartphone   │ 25000.0 │ TechNova Hyderabad Branch │ Hyderabad   │
+│ Smartphone   │ 25000.0 │ TechNova Mysuru Branch    │ Mysuru      │
+│ Laptop       │ 65000.0 │ TechNova Bengaluru Branch │ Bengaluru   │
+│ Laptop       │ 65000.0 │ TechNova Hyderabad Branch │ Hyderabad   │
+│ Laptop       │ 65000.0 │ TechNova Mysuru Branch    │ Mysuru      │
+│ Smart TV     │ 45000.0 │ TechNova Bengaluru Branch │ Bengaluru   │
+│ Smart TV     │ 45000.0 │ TechNova Hyderabad Branch │ Hyderabad   │
+│ Smart TV     │ 45000.0 │ TechNova Mysuru Branch    │ Mysuru      │
+╰──────────────┴─────────┴───────────────────────────┴─────────────╯
+sqlite> SELECT f.factory_name, f.city, SUM(fp.production_quantity) AS total_production FROM branch_db.factory f JOIN branch_db.factory_product fp ON f.factory_id = fp.factory_id GROUP BY f.factory_id;
+╭────────────────────────────────────┬───────────┬──────────────────╮
+│            factory_name            │   city    │ total_production │
+╞════════════════════════════════════╪═══════════╪══════════════════╡
+│ Technova Private Limited           │ Bengaluru │            11000 │
+│ Technova Private Limited           │ Mysuru    │             4500 │
+│ Technova Private Limited - Main    │ Hyderabad │            30000 │
+│ greenmarket Private Limited - Main │ Mysuru    │            14000 │
+╰────────────────────────────────────┴───────────┴──────────────────╯
+sqlite> SELECT c.company_name, COUNT(f.factory_id) AS factory_count FROM main.company c LEFT JOIN branch_db.factory f ON c.company_id = f.company_id GROUP BY c.company_id;
+╭─────────────────┬───────────────╮
+│  company_name   │ factory_count │
+╞═════════════════╪═══════════════╡
+│ TechNova Elc    │             3 │
+│ GreenMarket Elc │             2 │
+╰─────────────────┴───────────────╯
+sqlite> SELECT c.company_name, COUNT(f.factory_id) AS factory_count FROM main.company c JOIN branch_db.factory f ON c.company_id = f.company_id GROUP BY c.company_id ORDER BY factory_count DESC LIMIT 1;
+╭──────────────┬───────────────╮
+│ company_name │ factory_count │
+╞══════════════╪═══════════════╡
+│ TechNova Elc │             3 │
+╰──────────────┴───────────────╯
+sqlite> INSERT INTO branch_db.factory (company_id, factory_name, city, capacity)
+   ...> VALUES (1, 'TechNova Advanced Plant', 'Bengaluru', 500);
+sqlite> DELETE FROM branch_db.factory WHERE factory_id = 5;
+sqlite> select * from branch_db.factory;
+╭────────────┬────────────┬────────────────────────────────────┬───────────┬──────────╮
+│ factory_id │ company_id │            factory_name            │   city    │ capacity │
+╞════════════╪════════════╪════════════════════════════════════╪═══════════╪══════════╡
+│          1 │          1 │ Technova Private Limited           │ Bengaluru │      150 │
+│          2 │          1 │ Technova Private Limited           │ Mysuru    │      250 │
+│          3 │          1 │ Technova Private Limited - Main    │ Hyderabad │      800 │
+│          4 │          2 │ greenmarket Private Limited - Main │ Mysuru    │      350 │
+│          6 │          1 │ TechNova Advanced Plant            │ Bengaluru │      500 │
+╰────────────┴────────────┴────────────────────────────────────┴───────────┴──────────╯
+sqlite> DETACH DATABASE branch_db;
+sqlite> pragma database_list;
+╭─────┬──────┬──────────────────────────────────╮
+│ seq │ name │               file               │
+╞═════╪══════╪══════════════════════════════════╡
+│   0 │ main │ D:\sqlite-25104\main_database.db │
+╰─────┴──────┴──────────────────────────────────╯
+sqlite>

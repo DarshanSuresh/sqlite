@@ -1,0 +1,619 @@
+LAB04 
+
+sqlite3 main_database04.db
+PRAGMA database_list;
+DROP TABLE IF EXISTS employees;
+
+CREATE TABLE employees (
+    emp_id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    department TEXT,
+    city TEXT,
+    salary INTEGER,
+    hire_date TEXT,
+    email TEXT
+);
+
+INSERT INTO employees VALUES
+(1, 'Asha Rao', 'IT', 'Mysuru', 55000, '2019-06-15', 'asha@example.com'),
+(2, 'Bharath Kumar', 'HR', 'Bengaluru', 42000, '2020-01-10', 'bharath@example.com'),
+(3, 'Chitra Nair', 'Finance', 'Mysuru', 61000, '2018-03-22', 'chitra@example.com'),
+(4, 'Deepak Shetty', 'IT', 'Mangaluru', 72000, '2017-11-05', 'deepak@example.com'),
+(5, 'Esha Patil', 'Marketing', 'Hubballi', 48000, '2021-07-19', 'esha@example.com'),
+(6, 'Farhan Khan', 'IT', 'Bengaluru', 83000, '2016-09-30', 'farhan@example.com'),
+(7, 'Gita Hegde', 'Finance', 'Mysuru', 58000, '2019-12-01', 'gita@example.com'),
+(8, 'Harish Gowda', 'HR', 'Mysuru', 39000, '2022-02-14', 'harish@example.com'),
+(9, 'Indira Reddy', 'Marketing', 'Bengaluru', 52000, '2020-08-25', 'indira@example.com'),
+(10, 'Jayanth Bhat', 'IT', 'Mysuru', 67000, '2018-05-17', 'jayanth@example.com'),
+(11, 'Kavya Murthy', 'Finance', 'Bengaluru', 75000, '2015-04-09', 'kavya@example.com'),
+(12, 'Lokesh Naik', 'Sales', 'Mangaluru', 45000, '2021-10-03', 'lokesh@example.com'),
+(13, 'Meena Iyer', 'Sales', 'Hubballi', 47000, '2023-01-16', 'meena@example.com'),
+(14, 'Naveen Joshi', 'IT', 'Hubballi', 51000, '2022-06-27', 'naveen@example.com'),
+(15, 'Pooja Joshi', 'HR', 'Mysuru', 44000, '2020-11-11', 'pooja@example.com');
+
+sqlite> select * from employees;
+╭────────┬───────────────┬────────────┬───────────┬────────┬────────────┬─────────────────────╮
+│ emp_id │     name      │ department │   city    │ salary │ hire_date  │        email        │
+╞════════╪═══════════════╪════════════╪═══════════╪════════╪════════════╪═════════════════════╡
+│      1 │ Asha Rao      │ IT         │ Mysuru    │  55000 │ 2019-06-15 │ asha@example.com    │
+│      2 │ Bharath Kumar │ HR         │ Bengaluru │  42000 │ 2020-01-10 │ bharath@example.com │
+│      3 │ Chitra Nair   │ Finance    │ Mysuru    │  61000 │ 2018-03-22 │ chitra@example.com  │
+│      4 │ Deepak Shetty │ IT         │ Mangaluru │  72000 │ 2017-11-05 │ deepak@example.com  │
+│      5 │ Esha Patil    │ Marketing  │ Hubballi  │  48000 │ 2021-07-19 │ esha@example.com    │
+│      6 │ Farhan Khan   │ IT         │ Bengaluru │  83000 │ 2016-09-30 │ farhan@example.com  │
+│      7 │ Gita Hegde    │ Finance    │ Mysuru    │  58000 │ 2019-12-01 │ gita@example.com    │
+│      8 │ Harish Gowda  │ HR         │ Mysuru    │  39000 │ 2022-02-14 │ harish@example.com  │
+│      9 │ Indira Reddy  │ Marketing  │ Bengaluru │  52000 │ 2020-08-25 │ indira@example.com  │
+│     10 │ Jayanth Bhat  │ IT         │ Mysuru    │  67000 │ 2018-05-17 │ jayanth@example.com │
+│     11 │ Kavya Murthy  │ Finance    │ Bengaluru │  75000 │ 2015-04-09 │ kavya@example.com   │
+│     12 │ Lokesh Naik   │ Sales      │ Mangaluru │  45000 │ 2021-10-03 │ lokesh@example.com  │
+│     13 │ Meena Iyer    │ Sales      │ Hubballi  │  47000 │ 2023-01-16 │ meena@example.com   │
+│     14 │ Naveen Joshi  │ IT         │ Hubballi  │  51000 │ 2022-06-27 │ naveen@example.com  │
+│     15 │ Pooja Joshi   │ HR         │ Mysuru    │  44000 │ 2020-11-11 │ pooja@example.com   │
+╰────────┴───────────────┴────────────┴───────────┴────────┴────────────┴─────────────────────╯
+sqlite> select name, salary from employees;
+╭───────────────┬────────╮
+│     name      │ salary │
+╞═══════════════╪════════╡
+│ Asha Rao      │  55000 │
+│ Bharath Kumar │  42000 │
+│ Chitra Nair   │  61000 │
+│ Deepak Shetty │  72000 │
+│ Esha Patil    │  48000 │
+│ Farhan Khan   │  83000 │
+│ Gita Hegde    │  58000 │
+│ Harish Gowda  │  39000 │
+│ Indira Reddy  │  52000 │
+│ Jayanth Bhat  │  67000 │
+│ Kavya Murthy  │  75000 │
+│ Lokesh Naik   │  45000 │
+│ Meena Iyer    │  47000 │
+│ Naveen Joshi  │  51000 │
+│ Pooja Joshi   │  44000 │
+╰───────────────┴────────╯
+sqlite> select name as Employee, salary as Monthly_Pay from employees;
+╭───────────────┬─────────────╮
+│   Employee    │ Monthly_Pay │
+╞═══════════════╪═════════════╡
+│ Asha Rao      │       55000 │
+│ Bharath Kumar │       42000 │
+│ Chitra Nair   │       61000 │
+│ Deepak Shetty │       72000 │
+│ Esha Patil    │       48000 │
+│ Farhan Khan   │       83000 │
+│ Gita Hegde    │       58000 │
+│ Harish Gowda  │       39000 │
+│ Indira Reddy  │       52000 │
+│ Jayanth Bhat  │       67000 │
+│ Kavya Murthy  │       75000 │
+│ Lokesh Naik   │       45000 │
+│ Meena Iyer    │       47000 │
+│ Naveen Joshi  │       51000 │
+│ Pooja Joshi   │       44000 │
+╰───────────────┴─────────────╯
+sqlite> Select name, salary * 12 as Annual_Salary from employees;
+╭───────────────┬───────────────╮
+│     name      │ Annual_Salary │
+╞═══════════════╪═══════════════╡
+│ Asha Rao      │        660000 │
+│ Bharath Kumar │        504000 │
+│ Chitra Nair   │        732000 │
+│ Deepak Shetty │        864000 │
+│ Esha Patil    │        576000 │
+│ Farhan Khan   │        996000 │
+│ Gita Hegde    │        696000 │
+│ Harish Gowda  │        468000 │
+│ Indira Reddy  │        624000 │
+│ Jayanth Bhat  │        804000 │
+│ Kavya Murthy  │        900000 │
+│ Lokesh Naik   │        540000 │
+│ Meena Iyer    │        564000 │
+│ Naveen Joshi  │        612000 │
+│ Pooja Joshi   │        528000 │
+╰───────────────┴───────────────╯
+sqlite> Select department from employees;
+╭────────────╮
+│ department │
+╞════════════╡
+│ IT         │
+│ HR         │
+│ Finance    │
+│ IT         │
+│ Marketing  │
+│ IT         │
+│ Finance    │
+│ HR         │
+│ Marketing  │
+│ IT         │
+│ Finance    │
+│ Sales      │
+│ Sales      │
+│ IT         │
+│ HR         │
+╰────────────╯
+sqlite> select distinct department from employees;
+╭────────────╮
+│ department │
+╞════════════╡
+│ IT         │
+│ HR         │
+│ Finance    │
+│ Marketing  │
+│ Sales      │
+╰────────────╯
+sqlite> select distinct city from employees;
+╭───────────╮
+│   city    │
+╞═══════════╡
+│ Mysuru    │
+│ Bengaluru │
+│ Mangaluru │
+│ Hubballi  │
+╰───────────╯
+sqlite> select distinct department,city from employees;
+╭────────────┬───────────╮
+│ department │   city    │
+╞════════════╪═══════════╡
+│ IT         │ Mysuru    │
+│ HR         │ Bengaluru │
+│ Finance    │ Mysuru    │
+│ IT         │ Mangaluru │
+│ Marketing  │ Hubballi  │
+│ IT         │ Bengaluru │
+│ HR         │ Mysuru    │
+│ Marketing  │ Bengaluru │
+│ Finance    │ Bengaluru │
+│ Sales      │ Mangaluru │
+│ Sales      │ Hubballi  │
+│ IT         │ Hubballi  │
+
+
+Microsoft Windows [Version 10.0.26200.8246]
+(c) Microsoft Corporation. All rights reserved.
+
+D:\sqlite-25104>sqlite3 main_database04.db
+SQLite version 3.53.4 2026-07-24 19:02:57
+Enter ".help" for usage hints.
+sqlite> select * from employees;
+╭────────┬───────────────┬────────────┬───────────┬────────┬────────────┬─────────────────────╮
+│ emp_id │     name      │ department │   city    │ salary │ hire_date  │        email        │
+╞════════╪═══════════════╪════════════╪═══════════╪════════╪════════════╪═════════════════════╡
+│      1 │ Asha Rao      │ IT         │ Mysuru    │  55000 │ 2019-06-15 │ asha@example.com    │
+│      2 │ Bharath Kumar │ HR         │ Bengaluru │  42000 │ 2020-01-10 │ bharath@example.com │
+│      3 │ Chitra Nair   │ Finance    │ Mysuru    │  61000 │ 2018-03-22 │ chitra@example.com  │
+│      4 │ Deepak Shetty │ IT         │ Mangaluru │  72000 │ 2017-11-05 │ deepak@example.com  │
+│      5 │ Esha Patil    │ Marketing  │ Hubballi  │  48000 │ 2021-07-19 │ esha@example.com    │
+│      6 │ Farhan Khan   │ IT         │ Bengaluru │  83000 │ 2016-09-30 │ farhan@example.com  │
+│      7 │ Gita Hegde    │ Finance    │ Mysuru    │  58000 │ 2019-12-01 │ gita@example.com    │
+│      8 │ Harish Gowda  │ HR         │ Mysuru    │  39000 │ 2022-02-14 │ harish@example.com  │
+│      9 │ Indira Reddy  │ Marketing  │ Bengaluru │  52000 │ 2020-08-25 │ indira@example.com  │
+│     10 │ Jayanth Bhat  │ IT         │ Mysuru    │  67000 │ 2018-05-17 │ jayanth@example.com │
+│     11 │ Kavya Murthy  │ Finance    │ Bengaluru │  75000 │ 2015-04-09 │ kavya@example.com   │
+│     12 │ Lokesh Naik   │ Sales      │ Mangaluru │  45000 │ 2021-10-03 │ lokesh@example.com  │
+│     13 │ Meena Iyer    │ Sales      │ Hubballi  │  47000 │ 2023-01-16 │ meena@example.com   │
+│     14 │ Naveen Joshi  │ IT         │ Hubballi  │  51000 │ 2022-06-27 │ naveen@example.com  │
+│     15 │ Pooja Joshi   │ HR         │ Mysuru    │  44000 │ 2020-11-11 │ pooja@example.com   │
+╰────────┴───────────────┴────────────┴───────────┴────────┴────────────┴─────────────────────╯
+sqlite> -- 1. Employees from Mysuru with salary greater than 50000
+sqlite> SELECT *
+   ...> FROM employees
+   ...> WHERE city = 'Mysuru' AND salary > 50000;
+╭────────┬──────────────┬────────────┬────────┬────────┬────────────┬─────────────────────╮
+│ emp_id │     name     │ department │  city  │ salary │ hire_date  │        email        │
+╞════════╪══════════════╪════════════╪════════╪════════╪════════════╪═════════════════════╡
+│      1 │ Asha Rao     │ IT         │ Mysuru │  55000 │ 2019-06-15 │ asha@example.com    │
+│      3 │ Chitra Nair  │ Finance    │ Mysuru │  61000 │ 2018-03-22 │ chitra@example.com  │
+│      7 │ Gita Hegde   │ Finance    │ Mysuru │  58000 │ 2019-12-01 │ gita@example.com    │
+│     10 │ Jayanth Bhat │ IT         │ Mysuru │  67000 │ 2018-05-17 │ jayanth@example.com │
+╰────────┴──────────────┴────────────┴────────┴────────┴────────────┴─────────────────────╯
+sqlite> -- 2. Employees from HR or Sales department
+sqlite> SELECT *
+   ...> FROM employees
+   ...> WHERE department = 'HR' OR department = 'Sales';
+╭────────┬───────────────┬────────────┬───────────┬────────┬────────────┬─────────────────────╮
+│ emp_id │     name      │ department │   city    │ salary │ hire_date  │        email        │
+╞════════╪═══════════════╪════════════╪═══════════╪════════╪════════════╪═════════════════════╡
+│      2 │ Bharath Kumar │ HR         │ Bengaluru │  42000 │ 2020-01-10 │ bharath@example.com │
+│      8 │ Harish Gowda  │ HR         │ Mysuru    │  39000 │ 2022-02-14 │ harish@example.com  │
+│     12 │ Lokesh Naik   │ Sales      │ Mangaluru │  45000 │ 2021-10-03 │ lokesh@example.com  │
+│     13 │ Meena Iyer    │ Sales      │ Hubballi  │  47000 │ 2023-01-16 │ meena@example.com   │
+│     15 │ Pooja Joshi   │ HR         │ Mysuru    │  44000 │ 2020-11-11 │ pooja@example.com   │
+╰────────┴───────────────┴────────────┴───────────┴────────┴────────────┴─────────────────────╯
+sqlite> -- 3. Employees from HR or Sales using IN
+sqlite> SELECT *
+   ...> FROM employees
+   ...> WHERE department IN ('HR', 'Sales');
+╭────────┬───────────────┬────────────┬───────────┬────────┬────────────┬─────────────────────╮
+│ emp_id │     name      │ department │   city    │ salary │ hire_date  │        email        │
+╞════════╪═══════════════╪════════════╪═══════════╪════════╪════════════╪═════════════════════╡
+│      2 │ Bharath Kumar │ HR         │ Bengaluru │  42000 │ 2020-01-10 │ bharath@example.com │
+│      8 │ Harish Gowda  │ HR         │ Mysuru    │  39000 │ 2022-02-14 │ harish@example.com  │
+│     12 │ Lokesh Naik   │ Sales      │ Mangaluru │  45000 │ 2021-10-03 │ lokesh@example.com  │
+│     13 │ Meena Iyer    │ Sales      │ Hubballi  │  47000 │ 2023-01-16 │ meena@example.com   │
+│     15 │ Pooja Joshi   │ HR         │ Mysuru    │  44000 │ 2020-11-11 │ pooja@example.com   │
+╰────────┴───────────────┴────────────┴───────────┴────────┴────────────┴─────────────────────╯
+sqlite> -- 4. Employees whose city is NOT Mysuru, Bengaluru, or Hubballi
+sqlite> SELECT *
+   ...> FROM employees
+   ...> WHERE city NOT IN ('Mysuru', 'Bengaluru', 'Hubballi');
+╭────────┬───────────────┬────────────┬───────────┬────────┬────────────┬────────────────────╮
+│ emp_id │     name      │ department │   city    │ salary │ hire_date  │       email        │
+╞════════╪═══════════════╪════════════╪═══════════╪════════╪════════════╪════════════════════╡
+│      4 │ Deepak Shetty │ IT         │ Mangaluru │  72000 │ 2017-11-05 │ deepak@example.com │
+│     12 │ Lokesh Naik   │ Sales      │ Mangaluru │  45000 │ 2021-10-03 │ lokesh@example.com │
+╰────────┴───────────────┴────────────┴───────────┴────────┴────────────┴────────────────────╯
+sqlite> -- 5. Display unique department and city combinations
+sqlite> SELECT DISTINCT department, city
+   ...> FROM employees;
+╭────────────┬───────────╮
+│ department │   city    │
+╞════════════╪═══════════╡
+│ IT         │ Mysuru    │
+│ HR         │ Bengaluru │
+│ Finance    │ Mysuru    │
+│ IT         │ Mangaluru │
+│ Marketing  │ Hubballi  │
+│ IT         │ Bengaluru │
+│ HR         │ Mysuru    │
+│ Marketing  │ Bengaluru │
+│ Finance    │ Bengaluru │
+│ Sales      │ Mangaluru │
+│ Sales      │ Hubballi  │
+│ IT         │ Hubballi  │
+╰────────────┴───────────╯
+sqlite> -- 6. Employees from IT department
+sqlite> SELECT *
+   ...> FROM employees
+   ...> WHERE department = 'IT';
+╭────────┬───────────────┬────────────┬───────────┬────────┬────────────┬─────────────────────╮
+│ emp_id │     name      │ department │   city    │ salary │ hire_date  │        email        │
+╞════════╪═══════════════╪════════════╪═══════════╪════════╪════════════╪═════════════════════╡
+│      1 │ Asha Rao      │ IT         │ Mysuru    │  55000 │ 2019-06-15 │ asha@example.com    │
+│      4 │ Deepak Shetty │ IT         │ Mangaluru │  72000 │ 2017-11-05 │ deepak@example.com  │
+│      6 │ Farhan Khan   │ IT         │ Bengaluru │  83000 │ 2016-09-30 │ farhan@example.com  │
+│     10 │ Jayanth Bhat  │ IT         │ Mysuru    │  67000 │ 2018-05-17 │ jayanth@example.com │
+│     14 │ Naveen Joshi  │ IT         │ Hubballi  │  51000 │ 2022-06-27 │ naveen@example.com  │
+╰────────┴───────────────┴────────────┴───────────┴────────┴────────────┴─────────────────────╯
+sqlite> -- 7. Employees from Mysuru with salary greater than 50000
+sqlite> SELECT *
+   ...> FROM employees
+   ...> WHERE city = 'Mysuru' AND salary > 50000;
+╭────────┬──────────────┬────────────┬────────┬────────┬────────────┬─────────────────────╮
+│ emp_id │     name     │ department │  city  │ salary │ hire_date  │        email        │
+╞════════╪══════════════╪════════════╪════════╪════════╪════════════╪═════════════════════╡
+│      1 │ Asha Rao     │ IT         │ Mysuru │  55000 │ 2019-06-15 │ asha@example.com    │
+│      3 │ Chitra Nair  │ Finance    │ Mysuru │  61000 │ 2018-03-22 │ chitra@example.com  │
+│      7 │ Gita Hegde   │ Finance    │ Mysuru │  58000 │ 2019-12-01 │ gita@example.com    │
+│     10 │ Jayanth Bhat │ IT         │ Mysuru │  67000 │ 2018-05-17 │ jayanth@example.com │
+╰────────┴──────────────┴────────────┴────────┴────────┴────────────┴─────────────────────╯
+sqlite> SELECT *
+   ...> FROM employees
+   ...> WHERE salary BETWEEN 45000 AND 60000;
+╭────────┬──────────────┬────────────┬───────────┬────────┬────────────┬────────────────────╮
+│ emp_id │     name     │ department │   city    │ salary │ hire_date  │       email        │
+╞════════╪══════════════╪════════════╪═══════════╪════════╪════════════╪════════════════════╡
+│      1 │ Asha Rao     │ IT         │ Mysuru    │  55000 │ 2019-06-15 │ asha@example.com   │
+│      5 │ Esha Patil   │ Marketing  │ Hubballi  │  48000 │ 2021-07-19 │ esha@example.com   │
+│      7 │ Gita Hegde   │ Finance    │ Mysuru    │  58000 │ 2019-12-01 │ gita@example.com   │
+│      9 │ Indira Reddy │ Marketing  │ Bengaluru │  52000 │ 2020-08-25 │ indira@example.com │
+│     12 │ Lokesh Naik  │ Sales      │ Mangaluru │  45000 │ 2021-10-03 │ lokesh@example.com │
+│     13 │ Meena Iyer   │ Sales      │ Hubballi  │  47000 │ 2023-01-16 │ meena@example.com  │
+│     14 │ Naveen Joshi │ IT         │ Hubballi  │  51000 │ 2022-06-27 │ naveen@example.com │
+╰────────┴──────────────┴────────────┴───────────┴────────┴────────────┴────────────────────╯
+sqlite> SELECT *
+   ...> FROM employees
+   ...> WHERE hire_data BETWEEN '2019-01-01' AND '2026-12-31';
+Parse error near line 32: no such column: hire_data
+  SELECT * FROM employees WHERE hire_data BETWEEN '2019-01-01' AND '2026-12-31';
+                  error here ---^
+sqlite> SELECT *
+   ...> FROM employees
+   ...> WHERE hire_date BETWEEN '2019-01-01' AND '2026-12-31';
+╭────────┬───────────────┬────────────┬───────────┬────────┬────────────┬─────────────────────╮
+│ emp_id │     name      │ department │   city    │ salary │ hire_date  │        email        │
+╞════════╪═══════════════╪════════════╪═══════════╪════════╪════════════╪═════════════════════╡
+│      1 │ Asha Rao      │ IT         │ Mysuru    │  55000 │ 2019-06-15 │ asha@example.com    │
+│      2 │ Bharath Kumar │ HR         │ Bengaluru │  42000 │ 2020-01-10 │ bharath@example.com │
+│      5 │ Esha Patil    │ Marketing  │ Hubballi  │  48000 │ 2021-07-19 │ esha@example.com    │
+│      7 │ Gita Hegde    │ Finance    │ Mysuru    │  58000 │ 2019-12-01 │ gita@example.com    │
+│      8 │ Harish Gowda  │ HR         │ Mysuru    │  39000 │ 2022-02-14 │ harish@example.com  │
+│      9 │ Indira Reddy  │ Marketing  │ Bengaluru │  52000 │ 2020-08-25 │ indira@example.com  │
+│     12 │ Lokesh Naik   │ Sales      │ Mangaluru │  45000 │ 2021-10-03 │ lokesh@example.com  │
+│     13 │ Meena Iyer    │ Sales      │ Hubballi  │  47000 │ 2023-01-16 │ meena@example.com   │
+│     14 │ Naveen Joshi  │ IT         │ Hubballi  │  51000 │ 2022-06-27 │ naveen@example.com  │
+│     15 │ Pooja Joshi   │ HR         │ Mysuru    │  44000 │ 2020-11-11 │ pooja@example.com   │
+╰────────┴───────────────┴────────────┴───────────┴────────┴────────────┴─────────────────────╯
+sqlite> SELECT *
+   ...> FROM employees
+   ...> WHERE name LIKE 'A%';
+╭────────┬──────────┬────────────┬────────┬────────┬────────────┬──────────────────╮
+│ emp_id │   name   │ department │  city  │ salary │ hire_date  │      email       │
+╞════════╪══════════╪════════════╪════════╪════════╪════════════╪══════════════════╡
+│      1 │ Asha Rao │ IT         │ Mysuru │  55000 │ 2019-06-15 │ asha@example.com │
+╰────────┴──────────┴────────────┴────────┴────────┴────────────┴──────────────────╯
+sqlite> SELECT *
+   ...> FROM employees
+   ...> WHERE name LIKE '%a';
+╭────────┬──────────────┬────────────┬────────┬────────┬────────────┬────────────────────╮
+│ emp_id │     name     │ department │  city  │ salary │ hire_date  │       email        │
+╞════════╪══════════════╪════════════╪════════╪════════╪════════════╪════════════════════╡
+│      8 │ Harish Gowda │ HR         │ Mysuru │  39000 │ 2022-02-14 │ harish@example.com │
+╰────────┴──────────────┴────────────┴────────┴────────┴────────────┴────────────────────╯
+sqlite> SELECT *
+   ...> FROM employees
+   ...> WHERE name LIKE '%an%';
+╭────────┬──────────────┬────────────┬───────────┬────────┬────────────┬─────────────────────╮
+│ emp_id │     name     │ department │   city    │ salary │ hire_date  │        email        │
+╞════════╪══════════════╪════════════╪═══════════╪════════╪════════════╪═════════════════════╡
+│      6 │ Farhan Khan  │ IT         │ Bengaluru │  83000 │ 2016-09-30 │ farhan@example.com  │
+│     10 │ Jayanth Bhat │ IT         │ Mysuru    │  67000 │ 2018-05-17 │ jayanth@example.com │
+╰────────┴──────────────┴────────────┴───────────┴────────┴────────────┴─────────────────────╯
+sqlite> -- 2.11 Empl whose name has e as he second letter
+sqlite> SELECT *
+   ...> FROM employees
+   ...> WHERE name LIKE '_e%';
+╭────────┬───────────────┬────────────┬───────────┬────────┬────────────┬────────────────────╮
+│ emp_id │     name      │ department │   city    │ salary │ hire_date  │       email        │
+╞════════╪═══════════════╪════════════╪═══════════╪════════╪════════════╪════════════════════╡
+│      4 │ Deepak Shetty │ IT         │ Mangaluru │  72000 │ 2017-11-05 │ deepak@example.com │
+│     13 │ Meena Iyer    │ Sales      │ Hubballi  │  47000 │ 2023-01-16 │ meena@example.com  │
+╰────────┴───────────────┴────────────┴───────────┴────────┴────────────┴────────────────────╯
+sqlite> -- 2.12 Empl whose email has exactly 4 characters before @
+sqlite> SELECT *
+   ...> FROM employees
+   ...> WHERE email LIKE '____@%';
+╭────────┬────────────┬────────────┬──────────┬────────┬────────────┬──────────────────╮
+│ emp_id │    name    │ department │   city   │ salary │ hire_date  │      email       │
+╞════════╪════════════╪════════════╪══════════╪════════╪════════════╪══════════════════╡
+│      1 │ Asha Rao   │ IT         │ Mysuru   │  55000 │ 2019-06-15 │ asha@example.com │
+│      5 │ Esha Patil │ Marketing  │ Hubballi │  48000 │ 2021-07-19 │ esha@example.com │
+│      7 │ Gita Hegde │ Finance    │ Mysuru   │  58000 │ 2019-12-01 │ gita@example.com │
+╰────────┴────────────┴────────────┴──────────┴────────┴────────────┴──────────────────╯
+sqlite> -- 2.13 IT empl from Mysuru or Huballi earning at least 50000
+sqlite> SELECT *
+   ...> FROM employees
+   ...> WHERE department='IT' AND city IN ('Mysuru', 'Hubballi') AND salary >= 50000;
+╭────────┬──────────────┬────────────┬──────────┬────────┬────────────┬─────────────────────╮
+│ emp_id │     name     │ department │   city   │ salary │ hire_date  │        email        │
+╞════════╪══════════════╪════════════╪══════════╪════════╪════════════╪═════════════════════╡
+│      1 │ Asha Rao     │ IT         │ Mysuru   │  55000 │ 2019-06-15 │ asha@example.com    │
+│     10 │ Jayanth Bhat │ IT         │ Mysuru   │  67000 │ 2018-05-17 │ jayanth@example.com │
+│     14 │ Naveen Joshi │ IT         │ Hubballi │  51000 │ 2022-06-27 │ naveen@example.com  │
+╰────────┴──────────────┴────────────┴──────────┴────────┴────────────┴─────────────────────╯
+sqlite> -- 2.14 Empl whose salary is not between 40000 and 70000
+sqlite> SELECT *
+   ...> FROM employees
+   ...> WHERE salary NOT BETWEEN 40000 AND 70000;
+╭────────┬───────────────┬────────────┬───────────┬────────┬────────────┬────────────────────╮
+│ emp_id │     name      │ department │   city    │ salary │ hire_date  │       email        │
+╞════════╪═══════════════╪════════════╪═══════════╪════════╪════════════╪════════════════════╡
+│      4 │ Deepak Shetty │ IT         │ Mangaluru │  72000 │ 2017-11-05 │ deepak@example.com │
+│      6 │ Farhan Khan   │ IT         │ Bengaluru │  83000 │ 2016-09-30 │ farhan@example.com │
+│      8 │ Harish Gowda  │ HR         │ Mysuru    │  39000 │ 2022-02-14 │ harish@example.com │
+│     11 │ Kavya Murthy  │ Finance    │ Bengaluru │  75000 │ 2015-04-09 │ kavya@example.com  │
+╰────────┴───────────────┴────────────┴───────────┴────────┴────────────┴────────────────────╯
+sqlite> -- 3.1 List all em sorted by name (A to Z)
+sqlite> SELECT *
+   ...> FROM employees
+   ...> ORDER BY name;
+╭────────┬───────────────┬────────────┬───────────┬────────┬────────────┬─────────────────────╮
+│ emp_id │     name      │ department │   city    │ salary │ hire_date  │        email        │
+╞════════╪═══════════════╪════════════╪═══════════╪════════╪════════════╪═════════════════════╡
+│      1 │ Asha Rao      │ IT         │ Mysuru    │  55000 │ 2019-06-15 │ asha@example.com    │
+│      2 │ Bharath Kumar │ HR         │ Bengaluru │  42000 │ 2020-01-10 │ bharath@example.com │
+│      3 │ Chitra Nair   │ Finance    │ Mysuru    │  61000 │ 2018-03-22 │ chitra@example.com  │
+│      4 │ Deepak Shetty │ IT         │ Mangaluru │  72000 │ 2017-11-05 │ deepak@example.com  │
+│      5 │ Esha Patil    │ Marketing  │ Hubballi  │  48000 │ 2021-07-19 │ esha@example.com    │
+│      6 │ Farhan Khan   │ IT         │ Bengaluru │  83000 │ 2016-09-30 │ farhan@example.com  │
+│      7 │ Gita Hegde    │ Finance    │ Mysuru    │  58000 │ 2019-12-01 │ gita@example.com    │
+│      8 │ Harish Gowda  │ HR         │ Mysuru    │  39000 │ 2022-02-14 │ harish@example.com  │
+│      9 │ Indira Reddy  │ Marketing  │ Bengaluru │  52000 │ 2020-08-25 │ indira@example.com  │
+│     10 │ Jayanth Bhat  │ IT         │ Mysuru    │  67000 │ 2018-05-17 │ jayanth@example.com │
+│     11 │ Kavya Murthy  │ Finance    │ Bengaluru │  75000 │ 2015-04-09 │ kavya@example.com   │
+│     12 │ Lokesh Naik   │ Sales      │ Mangaluru │  45000 │ 2021-10-03 │ lokesh@example.com  │
+│     13 │ Meena Iyer    │ Sales      │ Hubballi  │  47000 │ 2023-01-16 │ meena@example.com   │
+│     14 │ Naveen Joshi  │ IT         │ Hubballi  │  51000 │ 2022-06-27 │ naveen@example.com  │
+│     15 │ Pooja Joshi   │ HR         │ Mysuru    │  44000 │ 2020-11-11 │ pooja@example.com   │
+
+sqlite> -- 3.2 List all empl sorted by salary from higher to lower
+sqlite> SELECT *
+   ...> FROM employees
+   ...> ORDER BY salary DESC;
+╭────────┬───────────────┬────────────┬───────────┬────────┬────────────┬─────────────────────╮
+│ emp_id │     name      │ department │   city    │ salary │ hire_date  │        email        │
+╞════════╪═══════════════╪════════════╪═══════════╪════════╪════════════╪═════════════════════╡
+│      6 │ Farhan Khan   │ IT         │ Bengaluru │  83000 │ 2016-09-30 │ farhan@example.com  │
+│     11 │ Kavya Murthy  │ Finance    │ Bengaluru │  75000 │ 2015-04-09 │ kavya@example.com   │
+│      4 │ Deepak Shetty │ IT         │ Mangaluru │  72000 │ 2017-11-05 │ deepak@example.com  │
+│     10 │ Jayanth Bhat  │ IT         │ Mysuru    │  67000 │ 2018-05-17 │ jayanth@example.com │
+│      3 │ Chitra Nair   │ Finance    │ Mysuru    │  61000 │ 2018-03-22 │ chitra@example.com  │
+│      7 │ Gita Hegde    │ Finance    │ Mysuru    │  58000 │ 2019-12-01 │ gita@example.com    │
+│      1 │ Asha Rao      │ IT         │ Mysuru    │  55000 │ 2019-06-15 │ asha@example.com    │
+│      9 │ Indira Reddy  │ Marketing  │ Bengaluru │  52000 │ 2020-08-25 │ indira@example.com  │
+│     14 │ Naveen Joshi  │ IT         │ Hubballi  │  51000 │ 2022-06-27 │ naveen@example.com  │
+│      5 │ Esha Patil    │ Marketing  │ Hubballi  │  48000 │ 2021-07-19 │ esha@example.com    │
+│     13 │ Meena Iyer    │ Sales      │ Hubballi  │  47000 │ 2023-01-16 │ meena@example.com   │
+│     12 │ Lokesh Naik   │ Sales      │ Mangaluru │  45000 │ 2021-10-03 │ lokesh@example.com  │
+│     15 │ Pooja Joshi   │ HR         │ Mysuru    │  44000 │ 2020-11-11 │ pooja@example.com   │
+│      2 │ Bharath Kumar │ HR         │ Bengaluru │  42000 │ 2020-01-10 │ bharath@example.com │
+│      8 │ Harish Gowda  │ HR         │ Mysuru    │  39000 │ 2022-02-14 │ harish@example.com  │
+╰────────┴───────────────┴────────────┴───────────┴────────┴────────────┴─────────────────────╯
+sqlite> -- 3.3 Sort by depart (A to Z) then by salary (high to low) within each department
+sqlite> SELECT *
+   ...> FROM employees
+   ...> ORDER BY department ASC, salary DESC;
+╭────────┬───────────────┬────────────┬───────────┬────────┬────────────┬─────────────────────╮
+│ emp_id │     name      │ department │   city    │ salary │ hire_date  │        email        │
+╞════════╪═══════════════╪════════════╪═══════════╪════════╪════════════╪═════════════════════╡
+│     11 │ Kavya Murthy  │ Finance    │ Bengaluru │  75000 │ 2015-04-09 │ kavya@example.com   │
+│      3 │ Chitra Nair   │ Finance    │ Mysuru    │  61000 │ 2018-03-22 │ chitra@example.com  │
+│      7 │ Gita Hegde    │ Finance    │ Mysuru    │  58000 │ 2019-12-01 │ gita@example.com    │
+│     15 │ Pooja Joshi   │ HR         │ Mysuru    │  44000 │ 2020-11-11 │ pooja@example.com   │
+│      2 │ Bharath Kumar │ HR         │ Bengaluru │  42000 │ 2020-01-10 │ bharath@example.com │
+│      8 │ Harish Gowda  │ HR         │ Mysuru    │  39000 │ 2022-02-14 │ harish@example.com  │
+│      6 │ Farhan Khan   │ IT         │ Bengaluru │  83000 │ 2016-09-30 │ farhan@example.com  │
+│      4 │ Deepak Shetty │ IT         │ Mangaluru │  72000 │ 2017-11-05 │ deepak@example.com  │
+│     10 │ Jayanth Bhat  │ IT         │ Mysuru    │  67000 │ 2018-05-17 │ jayanth@example.com │
+│      1 │ Asha Rao      │ IT         │ Mysuru    │  55000 │ 2019-06-15 │ asha@example.com    │
+│     14 │ Naveen Joshi  │ IT         │ Hubballi  │  51000 │ 2022-06-27 │ naveen@example.com  │
+│      9 │ Indira Reddy  │ Marketing  │ Bengaluru │  52000 │ 2020-08-25 │ indira@example.com  │
+│      5 │ Esha Patil    │ Marketing  │ Hubballi  │  48000 │ 2021-07-19 │ esha@example.com    │
+│     13 │ Meena Iyer    │ Sales      │ Hubballi  │  47000 │ 2023-01-16 │ meena@example.com   │
+│     12 │ Lokesh Naik   │ Sales      │ Mangaluru │  45000 │ 2021-10-03 │ lokesh@example.com  │
+╰────────┴───────────────┴────────────┴───────────┴────────┴────────────┴─────────────────────╯
+
+sqlite> -- 3.4 Show name and hire date of the 5 more recently hire employmees
+sqlite> SELECT *
+   ...> FROM employees
+   ...> ORDER BY hire_date DESC
+   ...> LIMIT 5;
+╭────────┬──────────────┬────────────┬───────────┬────────┬────────────┬────────────────────╮
+│ emp_id │     name     │ department │   city    │ salary │ hire_date  │       email        │
+╞════════╪══════════════╪════════════╪═══════════╪════════╪════════════╪════════════════════╡
+│     13 │ Meena Iyer   │ Sales      │ Hubballi  │  47000 │ 2023-01-16 │ meena@example.com  │
+│     14 │ Naveen Joshi │ IT         │ Hubballi  │  51000 │ 2022-06-27 │ naveen@example.com │
+│      8 │ Harish Gowda │ HR         │ Mysuru    │  39000 │ 2022-02-14 │ harish@example.com │
+│     12 │ Lokesh Naik  │ Sales      │ Mangaluru │  45000 │ 2021-10-03 │ lokesh@example.com │
+│      5 │ Esha Patil   │ Marketing  │ Hubballi  │  48000 │ 2021-07-19 │ esha@example.com   │
+╰────────┴──────────────┴────────────┴───────────┴────────┴────────────┴────────────────────╯
+
+
+sqlite> -- 3.5 Show the 3 highest-paid IT EMployees
+sqlite> SELECT *
+   ...> FROM employees
+   ...> WHERE department = 'IT'
+   ...> ORDER BY salary DESC
+   ...> LIMIT 3;
+╭────────┬───────────────┬────────────┬───────────┬────────┬────────────┬─────────────────────╮
+│ emp_id │     name      │ department │   city    │ salary │ hire_date  │        email        │
+╞════════╪═══════════════╪════════════╪═══════════╪════════╪════════════╪═════════════════════╡
+│      6 │ Farhan Khan   │ IT         │ Bengaluru │  83000 │ 2016-09-30 │ farhan@example.com  │
+│      4 │ Deepak Shetty │ IT         │ Mangaluru │  72000 │ 2017-11-05 │ deepak@example.com  │
+│     10 │ Jayanth Bhat  │ IT         │ Mysuru    │  67000 │ 2018-05-17 │ jayanth@example.com │
+
+sqlite> -- 3.6 Show that distinct cities in a alphebatical order
+sqlite> SELECT DISTINCT city FROM employees ORDER BY city;
+╭───────────╮
+│   city    │
+╞═══════════╡
+│ Bengaluru │
+│ Hubballi  │
+│ Mangaluru │
+│ Mysuru    │
+╰───────────╯
+
+sqlite> -- 3.7 Show Mysuru employees earning between 40000 and 60000, sorted by hire_date (oldest first)
+sqlite> SELECT * FROM employees WHERE city = 'Mysuru' AND salary BETWEEN 40000 AND 60000 ORDER BY hire_date ASC;
+╭────────┬─────────────┬────────────┬────────┬────────┬────────────┬───────────────────╮
+│ emp_id │    name     │ department │  city  │ salary │ hire_date  │       email       │
+╞════════╪═════════════╪════════════╪════════╪════════╪════════════╪═══════════════════╡
+│      1 │ Asha Rao    │ IT         │ Mysuru │  55000 │ 2019-06-15 │ asha@example.com  │
+│      7 │ Gita Hegde  │ Finance    │ Mysuru │  58000 │ 2019-12-01 │ gita@example.com  │
+│     15 │ Pooja Joshi │ HR         │ Mysuru │  44000 │ 2020-11-11 │ pooja@example.com │
+╰────────┴─────────────┴────────────┴────────┴────────┴────────────┴───────────────────╯
+
+sqlite> -- 3.8 Show emp whose name contains a and who are in IT or FInance, sorted by salary descending
+sqlite> SELECT * FROM employees WHERE name LIKE '%a%' AND department IN ('IT', 'Finance')ORDER BY salary Desc;
+╭────────┬───────────────┬────────────┬───────────┬────────┬────────────┬─────────────────────╮
+│ emp_id │     name      │ department │   city    │ salary │ hire_date  │        email        │
+╞════════╪═══════════════╪════════════╪═══════════╪════════╪════════════╪═════════════════════╡
+│      6 │ Farhan Khan   │ IT         │ Bengaluru │  83000 │ 2016-09-30 │ farhan@example.com  │
+│     11 │ Kavya Murthy  │ Finance    │ Bengaluru │  75000 │ 2015-04-09 │ kavya@example.com   │
+│      4 │ Deepak Shetty │ IT         │ Mangaluru │  72000 │ 2017-11-05 │ deepak@example.com  │
+│     10 │ Jayanth Bhat  │ IT         │ Mysuru    │  67000 │ 2018-05-17 │ jayanth@example.com │
+│      3 │ Chitra Nair   │ Finance    │ Mysuru    │  61000 │ 2018-03-22 │ chitra@example.com  │
+│      7 │ Gita Hegde    │ Finance    │ Mysuru    │  58000 │ 2019-12-01 │ gita@example.com    │
+│      1 │ Asha Rao      │ IT         │ Mysuru    │  55000 │ 2019-06-15 │ asha@example.com    │
+│     14 │ Naveen Joshi  │ IT         │ Hubballi  │  51000 │ 2022-06-27 │ naveen@example.com  │
+╰────────┴───────────────┴────────────┴───────────┴────────┴────────────┴─────────────────────╯
+
+sqlite> -- U1 Change the alary of employee with emp_id 8 to 45000
+sqlite> UPDATE employees
+   ...> SET salary = salary = 45000 WHERE emp_id = 8;
+sqlite> SELECT * FROM employees;
+╭────────┬───────────────┬────────────┬───────────┬────────┬────────────┬─────────────────────╮
+│ emp_id │     name      │ department │   city    │ salary │ hire_date  │        email        │
+╞════════╪═══════════════╪════════════╪═══════════╪════════╪════════════╪═════════════════════╡
+│      1 │ Asha Rao      │ IT         │ Mysuru    │  55000 │ 2019-06-15 │ asha@example.com    │
+│      2 │ Bharath Kumar │ HR         │ Bengaluru │  42000 │ 2020-01-10 │ bharath@example.com │
+│      3 │ Chitra Nair   │ Finance    │ Mysuru    │  61000 │ 2018-03-22 │ chitra@example.com  │
+│      4 │ Deepak Shetty │ IT         │ Mangaluru │  72000 │ 2017-11-05 │ deepak@example.com  │
+│      5 │ Esha Patil    │ Marketing  │ Hubballi  │  48000 │ 2021-07-19 │ esha@example.com    │
+│      6 │ Farhan Khan   │ IT         │ Bengaluru │  83000 │ 2016-09-30 │ farhan@example.com  │
+│      7 │ Gita Hegde    │ Finance    │ Mysuru    │  58000 │ 2019-12-01 │ gita@example.com    │
+│      8 │ Harish Gowda  │ HR         │ Mysuru    │      0 │ 2022-02-14 │ harish@example.com  │
+│      9 │ Indira Reddy  │ Marketing  │ Bengaluru │  52000 │ 2020-08-25 │ indira@example.com  │
+│     10 │ Jayanth Bhat  │ IT         │ Mysuru    │  67000 │ 2018-05-17 │ jayanth@example.com │
+│     11 │ Kavya Murthy  │ Finance    │ Bengaluru │  75000 │ 2015-04-09 │ kavya@example.com   │
+│     12 │ Lokesh Naik   │ Sales      │ Mangaluru │  45000 │ 2021-10-03 │ lokesh@example.com  │
+│     13 │ Meena Iyer    │ Sales      │ Hubballi  │  47000 │ 2023-01-16 │ meena@example.com   │
+│     14 │ Naveen Joshi  │ IT         │ Hubballi  │  51000 │ 2022-06-27 │ naveen@example.com  │
+│     15 │ Pooja Joshi   │ HR         │ Mysuru    │  44000 │ 2020-11-11 │ pooja@example.com   │
+╰────────┴───────────────┴────────────┴───────────┴────────┴────────────┴─────────────────────╯
+sqlite> UPDATE employees
+   ...> SET salary = 45000 WHERE emp_id = 8;
+sqlite> SELECT * FROM employees;
+╭────────┬───────────────┬────────────┬───────────┬────────┬────────────┬─────────────────────╮
+│ emp_id │     name      │ department │   city    │ salary │ hire_date  │        email        │
+╞════════╪═══════════════╪════════════╪═══════════╪════════╪════════════╪═════════════════════╡
+│      1 │ Asha Rao      │ IT         │ Mysuru    │  55000 │ 2019-06-15 │ asha@example.com    │
+│      2 │ Bharath Kumar │ HR         │ Bengaluru │  42000 │ 2020-01-10 │ bharath@example.com │
+│      3 │ Chitra Nair   │ Finance    │ Mysuru    │  61000 │ 2018-03-22 │ chitra@example.com  │
+│      4 │ Deepak Shetty │ IT         │ Mangaluru │  72000 │ 2017-11-05 │ deepak@example.com  │
+│      5 │ Esha Patil    │ Marketing  │ Hubballi  │  48000 │ 2021-07-19 │ esha@example.com    │
+│      6 │ Farhan Khan   │ IT         │ Bengaluru │  83000 │ 2016-09-30 │ farhan@example.com  │
+│      7 │ Gita Hegde    │ Finance    │ Mysuru    │  58000 │ 2019-12-01 │ gita@example.com    │
+│      8 │ Harish Gowda  │ HR         │ Mysuru    │  45000 │ 2022-02-14 │ harish@example.com  │
+│      9 │ Indira Reddy  │ Marketing  │ Bengaluru │  52000 │ 2020-08-25 │ indira@example.com  │
+│     10 │ Jayanth Bhat  │ IT         │ Mysuru    │  67000 │ 2018-05-17 │ jayanth@example.com │
+│     11 │ Kavya Murthy  │ Finance    │ Bengaluru │  75000 │ 2015-04-09 │ kavya@example.com   │
+│     12 │ Lokesh Naik   │ Sales      │ Mangaluru │  45000 │ 2021-10-03 │ lokesh@example.com  │
+│     13 │ Meena Iyer    │ Sales      │ Hubballi  │  47000 │ 2023-01-16 │ meena@example.com   │
+│     14 │ Naveen Joshi  │ IT         │ Hubballi  │  51000 │ 2022-06-27 │ naveen@example.com  │
+│     15 │ Pooja Joshi   │ HR         │ Mysuru    │  44000 │ 2020-11-11 │ pooja@example.com   │
+╰────────┴───────────────┴────────────┴───────────┴────────┴────────────┴─────────────────────╯
+sqlite> -- U2 Give all IT employees a 10% raise
+sqlite> UPDATE employees SET salary = salary * 1.10 WHERE department = 'IT';
+sqlite> SELECT * FROM employees;
+╭────────┬───────────────┬────────────┬───────────┬────────────────────┬────────────┬─────────────────────╮
+│ emp_id │     name      │ department │   city    │       salary       │ hire_date  │        email        │
+╞════════╪═══════════════╪════════════╪═══════════╪════════════════════╪════════════╪═════════════════════╡
+│      1 │ Asha Rao      │ IT         │ Mysuru    │ 60500.000000000007 │ 2019-06-15 │ asha@example.com    │
+│      2 │ Bharath Kumar │ HR         │ Bengaluru │              42000 │ 2020-01-10 │ bharath@example.com │
+│      3 │ Chitra Nair   │ Finance    │ Mysuru    │              61000 │ 2018-03-22 │ chitra@example.com  │
+│      4 │ Deepak Shetty │ IT         │ Mangaluru │              79200 │ 2017-11-05 │ deepak@example.com  │
+│      5 │ Esha Patil    │ Marketing  │ Hubballi  │              48000 │ 2021-07-19 │ esha@example.com    │
+│      6 │ Farhan Khan   │ IT         │ Bengaluru │ 91300.000000000015 │ 2016-09-30 │ farhan@example.com  │
+│      7 │ Gita Hegde    │ Finance    │ Mysuru    │              58000 │ 2019-12-01 │ gita@example.com    │
+│      8 │ Harish Gowda  │ HR         │ Mysuru    │              45000 │ 2022-02-14 │ harish@example.com  │
+│      9 │ Indira Reddy  │ Marketing  │ Bengaluru │              52000 │ 2020-08-25 │ indira@example.com  │
+│     10 │ Jayanth Bhat  │ IT         │ Mysuru    │              73700 │ 2018-05-17 │ jayanth@example.com │
+│     11 │ Kavya Murthy  │ Finance    │ Bengaluru │              75000 │ 2015-04-09 │ kavya@example.com   │
+│     12 │ Lokesh Naik   │ Sales      │ Mangaluru │              45000 │ 2021-10-03 │ lokesh@example.com  │
+│     13 │ Meena Iyer    │ Sales      │ Hubballi  │              47000 │ 2023-01-16 │ meena@example.com   │
+│     14 │ Naveen Joshi  │ IT         │ Hubballi  │ 56100.000000000007 │ 2022-06-27 │ naveen@example.com  │
+│     15 │ Pooja Joshi   │ HR         │ Mysuru    │              44000 │ 2020-11-11 │ pooja@example.com   │
+╰────────┴───────────────┴────────────┴───────────┴────────────────────┴────────────┴─────────────────────╯
+sqlite> -- U3 Move emp 12(Lokesh Naik) to Mysuru
+sqlite> UPDATE employees
+   ...> SET city = 'Mysuru'
+   ...> WHERE emp_id = 12;
+sqlite> SELECT * FROM employees;
+╭────────┬───────────────┬────────────┬───────────┬────────────────────┬────────────┬─────────────────────╮
+│ emp_id │     name      │ department │   city    │       salary       │ hire_date  │        email        │
+╞════════╪═══════════════╪════════════╪═══════════╪════════════════════╪════════════╪═════════════════════╡
+│      1 │ Asha Rao      │ IT         │ Mysuru    │ 60500.000000000007 │ 2019-06-15 │ asha@example.com    │
+│      2 │ Bharath Kumar │ HR         │ Bengaluru │              42000 │ 2020-01-10 │ bharath@example.com │
+│      3 │ Chitra Nair   │ Finance    │ Mysuru    │              61000 │ 2018-03-22 │ chitra@example.com  │
+│      4 │ Deepak Shetty │ IT         │ Mangaluru │              79200 │ 2017-11-05 │ deepak@example.com  │
+│      5 │ Esha Patil    │ Marketing  │ Hubballi  │              48000 │ 2021-07-19 │ esha@example.com    │
+│      6 │ Farhan Khan   │ IT         │ Bengaluru │ 91300.000000000015 │ 2016-09-30 │ farhan@example.com  │
+│      7 │ Gita Hegde    │ Finance    │ Mysuru    │              58000 │ 2019-12-01 │ gita@example.com    │
+│      8 │ Harish Gowda  │ HR         │ Mysuru    │              45000 │ 2022-02-14 │ harish@example.com  │
+│      9 │ Indira Reddy  │ Marketing  │ Bengaluru │              52000 │ 2020-08-25 │ indira@example.com  │
+│     10 │ Jayanth Bhat  │ IT         │ Mysuru    │              73700 │ 2018-05-17 │ jayanth@example.com │
+│     11 │ Kavya Murthy  │ Finance    │ Bengaluru │              75000 │ 2015-04-09 │ kavya@example.com   │
+│     12 │ Lokesh Naik   │ Sales      │ Mysuru    │              45000 │ 2021-10-03 │ lokesh@example.com  │
+│     13 │ Meena Iyer    │ Sales      │ Hubballi  │              47000 │ 2023-01-16 │ meena@example.com   │
+│     14 │ Naveen Joshi  │ IT         │ Hubballi  │ 56100.000000000007 │ 2022-06-27 │ naveen@example.com  │
+│     15 │ Pooja Joshi   │ HR         │ Mysuru    │              44000 │ 2020-11-11 │ pooja@example.com   │
